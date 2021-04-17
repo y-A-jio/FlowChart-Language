@@ -1,0 +1,3 @@
+# Project exclude paths
+/languages/FlowchartLanguage/classes_gen/
+/languages/FlowchartLanguage/generator/classes_gen/
