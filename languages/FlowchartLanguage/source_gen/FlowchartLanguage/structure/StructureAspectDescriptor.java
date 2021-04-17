@@ -17,17 +17,20 @@ import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptBody = createDescriptorForBody();
+  /*package*/ final ConceptDescriptor myConceptCondition = createDescriptorForCondition();
   /*package*/ final ConceptDescriptor myConceptDecision = createDescriptorForDecision();
-  /*package*/ final ConceptDescriptor myConceptDecisionTransmission = createDescriptorForDecisionTransmission();
   /*package*/ final ConceptDescriptor myConceptDelay = createDescriptorForDelay();
+  /*package*/ final ConceptDescriptor myConceptDoWhileLoop = createDescriptorForDoWhileLoop();
   /*package*/ final ConceptDescriptor myConceptEmptyStatement = createDescriptorForEmptyStatement();
   /*package*/ final ConceptDescriptor myConceptEnd = createDescriptorForEnd();
   /*package*/ final ConceptDescriptor myConceptFlowChart = createDescriptorForFlowChart();
+  /*package*/ final ConceptDescriptor myConceptParallel = createDescriptorForParallel();
   /*package*/ final ConceptDescriptor myConceptProcedure = createDescriptorForProcedure();
   /*package*/ final ConceptDescriptor myConceptProcedureTransmission = createDescriptorForProcedureTransmission();
   /*package*/ final ConceptDescriptor myConceptStart = createDescriptorForStart();
   /*package*/ final ConceptDescriptor myConceptStatement = createDescriptorForStatement();
   /*package*/ final ConceptDescriptor myConceptStatementTransmission = createDescriptorForStatementTransmission();
+  /*package*/ final ConceptDescriptor myConceptWhileLoop = createDescriptorForWhileLoop();
   /*package*/ final EnumerationDescriptor myEnumerationTimeType = new EnumerationDescriptor_TimeType();
   private final LanguageConceptSwitch myIndexSwitch;
 
@@ -43,7 +46,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptBody, myConceptDecision, myConceptDecisionTransmission, myConceptDelay, myConceptEmptyStatement, myConceptEnd, myConceptFlowChart, myConceptProcedure, myConceptProcedureTransmission, myConceptStart, myConceptStatement, myConceptStatementTransmission);
+    return Arrays.asList(myConceptBody, myConceptCondition, myConceptDecision, myConceptDelay, myConceptDoWhileLoop, myConceptEmptyStatement, myConceptEnd, myConceptFlowChart, myConceptParallel, myConceptProcedure, myConceptProcedureTransmission, myConceptStart, myConceptStatement, myConceptStatementTransmission, myConceptWhileLoop);
   }
 
   @Override
@@ -52,18 +55,22 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     switch (myIndexSwitch.index(id)) {
       case LanguageConceptSwitch.Body:
         return myConceptBody;
+      case LanguageConceptSwitch.Condition:
+        return myConceptCondition;
       case LanguageConceptSwitch.Decision:
         return myConceptDecision;
-      case LanguageConceptSwitch.DecisionTransmission:
-        return myConceptDecisionTransmission;
       case LanguageConceptSwitch.Delay:
         return myConceptDelay;
+      case LanguageConceptSwitch.DoWhileLoop:
+        return myConceptDoWhileLoop;
       case LanguageConceptSwitch.EmptyStatement:
         return myConceptEmptyStatement;
       case LanguageConceptSwitch.End:
         return myConceptEnd;
       case LanguageConceptSwitch.FlowChart:
         return myConceptFlowChart;
+      case LanguageConceptSwitch.Parallel:
+        return myConceptParallel;
       case LanguageConceptSwitch.Procedure:
         return myConceptProcedure;
       case LanguageConceptSwitch.ProcedureTransmission:
@@ -74,6 +81,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptStatement;
       case LanguageConceptSwitch.StatementTransmission:
         return myConceptStatementTransmission;
+      case LanguageConceptSwitch.WhileLoop:
+        return myConceptWhileLoop;
       default:
         return null;
     }
@@ -95,25 +104,23 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.version(2);
     return b.create();
   }
+  private static ConceptDescriptor createDescriptorForCondition() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("FlowchartLanguage", "Condition", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x2274e5fa436e7f1fL);
+    b.class_(false, false, false);
+    b.origin("r:d21c3985-4ff8-4bc8-acbd-041fc47620f8(FlowchartLanguage.structure)/2482862157623885599");
+    b.version(2);
+    b.property("condition", 0x2274e5fa436e804aL).type(PrimitiveTypeId.STRING).origin("2482862157623885898").done();
+    b.property("value", 0x2274e5fa436f27feL).type(PrimitiveTypeId.BOOLEAN).origin("2482862157623928830").done();
+    return b.create();
+  }
   private static ConceptDescriptor createDescriptorForDecision() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("FlowchartLanguage", "Decision", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195d33612L);
     b.class_(false, false, false);
     b.super_("FlowchartLanguage.structure.Body", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL);
-    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
     b.origin("r:d21c3985-4ff8-4bc8-acbd-041fc47620f8(FlowchartLanguage.structure)/5888807057646368274");
     b.version(2);
-    b.property("content", 0x51b93ed195d63875L).type(PrimitiveTypeId.STRING).origin("5888807057646565493").done();
-    b.property("result", 0x51b93ed195dbdf8aL).type(PrimitiveTypeId.BOOLEAN).origin("5888807057646935946").done();
-    b.aggregate("statement", 0x51b93ed195dbdf8dL).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195d0d89bL).optional(true).ordered(true).multiple(true).origin("5888807057646935949").done();
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForDecisionTransmission() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("FlowchartLanguage", "DecisionTransmission", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e4bcf9L);
-    b.class_(false, false, false);
-    b.super_("FlowchartLanguage.structure.Body", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL);
-    b.origin("r:d21c3985-4ff8-4bc8-acbd-041fc47620f8(FlowchartLanguage.structure)/5888807057647516921");
-    b.version(2);
-    b.associate("decision", 0x51b93ed195e4bcfaL).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195d33612L).optional(false).origin("5888807057647516922").done();
+    b.aggregate("condition", 0x2274e5fa4371aa53L).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x2274e5fa436e7f1fL).optional(false).ordered(true).multiple(true).origin("2482862157624093267").done();
+    b.aggregate("body", 0x2274e5fa4371aa6aL).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL).optional(true).ordered(true).multiple(true).origin("2482862157624093290").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForDelay() {
@@ -124,6 +131,16 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.version(2);
     b.property("delayTime", 0x51b93ed195ded53bL).type(PrimitiveTypeId.INTEGER).origin("5888807057647129915").done();
     b.property("delayTimeType", 0x51b93ed195e53afaL).type(MetaIdFactory.dataTypeId(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e53aebL)).origin("5888807057647549178").done();
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForDoWhileLoop() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("FlowchartLanguage", "DoWhileLoop", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x2274e5fa4371069dL);
+    b.class_(false, false, false);
+    b.super_("FlowchartLanguage.structure.Body", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL);
+    b.origin("r:d21c3985-4ff8-4bc8-acbd-041fc47620f8(FlowchartLanguage.structure)/2482862157624051357");
+    b.version(2);
+    b.aggregate("condition", 0x2274e5fa437106a5L).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x2274e5fa436e7f1fL).optional(false).ordered(true).multiple(true).origin("2482862157624051365").done();
+    b.aggregate("body", 0x2274e5fa437106abL).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL).optional(true).ordered(true).multiple(true).origin("2482862157624051371").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForEmptyStatement() {
@@ -151,6 +168,17 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.aggregate("start", 0x51b93ed195dd2ac8L).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195dd2abbL).optional(false).ordered(true).multiple(false).origin("5888807057647020744").done();
     b.aggregate("body", 0x51b93ed195e199acL).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL).optional(true).ordered(true).multiple(true).origin("5888807057647311276").done();
     b.aggregate("end", 0x51b93ed195ddfdefL).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195ddfd8fL).optional(false).ordered(true).multiple(false).origin("5888807057647074799").done();
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForParallel() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("FlowchartLanguage", "Parallel", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x2274e5fa436b39e7L);
+    b.class_(false, false, false);
+    b.super_("FlowchartLanguage.structure.Body", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL);
+    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
+    b.origin("r:d21c3985-4ff8-4bc8-acbd-041fc47620f8(FlowchartLanguage.structure)/2482862157623671271");
+    b.version(2);
+    b.aggregate("body1", 0x2274e5fa436b39e8L).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL).optional(false).ordered(true).multiple(true).origin("2482862157623671272").done();
+    b.aggregate("body2", 0x2274e5fa43734b24L).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL).optional(false).ordered(true).multiple(true).origin("2482862157624199972").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForProcedure() {
@@ -196,6 +224,16 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:d21c3985-4ff8-4bc8-acbd-041fc47620f8(FlowchartLanguage.structure)/5888807057646694901");
     b.version(2);
     b.associate("statement", 0x51b93ed195d831f6L).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195d0d89bL).optional(false).origin("5888807057646694902").done();
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForWhileLoop() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("FlowchartLanguage", "WhileLoop", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x2274e5fa436de8a1L);
+    b.class_(false, false, false);
+    b.super_("FlowchartLanguage.structure.Body", 0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL);
+    b.origin("r:d21c3985-4ff8-4bc8-acbd-041fc47620f8(FlowchartLanguage.structure)/2482862157623847073");
+    b.version(2);
+    b.aggregate("condition", 0x2274e5fa436e8148L).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x2274e5fa436e7f1fL).optional(false).ordered(true).multiple(true).origin("2482862157623886152").done();
+    b.aggregate("body", 0x2274e5fa437106afL).target(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e1997bL).optional(true).ordered(true).multiple(true).origin("2482862157624051375").done();
     return b.create();
   }
 }

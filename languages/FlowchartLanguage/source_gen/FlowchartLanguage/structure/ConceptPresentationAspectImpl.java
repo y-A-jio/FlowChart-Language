@@ -10,17 +10,20 @@ import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
   private ConceptPresentation props_Body;
+  private ConceptPresentation props_Condition;
   private ConceptPresentation props_Decision;
-  private ConceptPresentation props_DecisionTransmission;
   private ConceptPresentation props_Delay;
+  private ConceptPresentation props_DoWhileLoop;
   private ConceptPresentation props_EmptyStatement;
   private ConceptPresentation props_End;
   private ConceptPresentation props_FlowChart;
+  private ConceptPresentation props_Parallel;
   private ConceptPresentation props_Procedure;
   private ConceptPresentation props_ProcedureTransmission;
   private ConceptPresentation props_Start;
   private ConceptPresentation props_Statement;
   private ConceptPresentation props_StatementTransmission;
+  private ConceptPresentation props_WhileLoop;
 
   @Override
   @Nullable
@@ -33,20 +36,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Body = cpb.create();
         }
         return props_Body;
+      case LanguageConceptSwitch.Condition:
+        if (props_Condition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Condition");
+          props_Condition = cpb.create();
+        }
+        return props_Condition;
       case LanguageConceptSwitch.Decision:
         if (props_Decision == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.presentationByName();
+          cpb.rawPresentation("Decision");
           props_Decision = cpb.create();
         }
         return props_Decision;
-      case LanguageConceptSwitch.DecisionTransmission:
-        if (props_DecisionTransmission == null) {
-          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.presentationByReference(0xae0eef6aa0ca474eL, 0x9247c32571221195L, 0x51b93ed195e4bcf9L, 0x51b93ed195e4bcfaL, "decision", "", "");
-          props_DecisionTransmission = cpb.create();
-        }
-        return props_DecisionTransmission;
       case LanguageConceptSwitch.Delay:
         if (props_Delay == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -54,6 +57,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Delay = cpb.create();
         }
         return props_Delay;
+      case LanguageConceptSwitch.DoWhileLoop:
+        if (props_DoWhileLoop == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DoWhileLoop");
+          props_DoWhileLoop = cpb.create();
+        }
+        return props_DoWhileLoop;
       case LanguageConceptSwitch.EmptyStatement:
         if (props_EmptyStatement == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -75,6 +85,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_FlowChart = cpb.create();
         }
         return props_FlowChart;
+      case LanguageConceptSwitch.Parallel:
+        if (props_Parallel == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Parallel = cpb.create();
+        }
+        return props_Parallel;
       case LanguageConceptSwitch.Procedure:
         if (props_Procedure == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -110,6 +127,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_StatementTransmission = cpb.create();
         }
         return props_StatementTransmission;
+      case LanguageConceptSwitch.WhileLoop:
+        if (props_WhileLoop == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("WhileLoop");
+          props_WhileLoop = cpb.create();
+        }
+        return props_WhileLoop;
     }
     return null;
   }

@@ -10,32 +10,38 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 public final class LanguageConceptSwitch {
   private final LanguageConceptIndex myIndex;
   public static final int Body = 0;
-  public static final int Decision = 1;
-  public static final int DecisionTransmission = 2;
+  public static final int Condition = 1;
+  public static final int Decision = 2;
   public static final int Delay = 3;
-  public static final int EmptyStatement = 4;
-  public static final int End = 5;
-  public static final int FlowChart = 6;
-  public static final int Procedure = 7;
-  public static final int ProcedureTransmission = 8;
-  public static final int Start = 9;
-  public static final int Statement = 10;
-  public static final int StatementTransmission = 11;
+  public static final int DoWhileLoop = 4;
+  public static final int EmptyStatement = 5;
+  public static final int End = 6;
+  public static final int FlowChart = 7;
+  public static final int Parallel = 8;
+  public static final int Procedure = 9;
+  public static final int ProcedureTransmission = 10;
+  public static final int Start = 11;
+  public static final int Statement = 12;
+  public static final int StatementTransmission = 13;
+  public static final int WhileLoop = 14;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0xae0eef6aa0ca474eL, 0x9247c32571221195L);
     builder.put(0x51b93ed195e1997bL, Body);
+    builder.put(0x2274e5fa436e7f1fL, Condition);
     builder.put(0x51b93ed195d33612L, Decision);
-    builder.put(0x51b93ed195e4bcf9L, DecisionTransmission);
     builder.put(0x51b93ed195ded53aL, Delay);
+    builder.put(0x2274e5fa4371069dL, DoWhileLoop);
     builder.put(0x51b93ed195e74e15L, EmptyStatement);
     builder.put(0x51b93ed195ddfd8fL, End);
     builder.put(0x66267d1598c0f0ddL, FlowChart);
+    builder.put(0x2274e5fa436b39e7L, Parallel);
     builder.put(0x51b93ed195d52992L, Procedure);
     builder.put(0x51b93ed195d5cd2aL, ProcedureTransmission);
     builder.put(0x51b93ed195dd2abbL, Start);
     builder.put(0x51b93ed195d0d89bL, Statement);
     builder.put(0x51b93ed195d831f5L, StatementTransmission);
+    builder.put(0x2274e5fa436de8a1L, WhileLoop);
     myIndex = builder.seal();
   }
 
